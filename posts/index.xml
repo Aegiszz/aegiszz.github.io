@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on My New Hugo Site</title>
-    <link>https://www.aegiszz.github.io/posts/</link>
+    <link>https://aegiszz.github.io/posts/</link>
     <description>Recent content in Posts on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 May 2022 14:20:12 +0800</lastBuildDate><atom:link href="https://www.aegiszz.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 May 2022 14:20:12 +0800</lastBuildDate><atom:link href="https://aegiszz.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>second</title>
-      <link>https://www.aegiszz.github.io/posts/first/</link>
+      <link>https://aegiszz.github.io/posts/first/</link>
       <pubDate>Sun, 01 May 2022 14:20:12 +0800</pubDate>
       
-      <guid>https://www.aegiszz.github.io/posts/first/</guid>
+      <guid>https://aegiszz.github.io/posts/first/</guid>
       <description>zzzzzzzzz</description>
     </item>
     
