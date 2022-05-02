@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>My New Hugo Site</title>
+    <title>Aegiszz&#39;s Blog</title>
     <link>https://aegiszz.github.io/</link>
-    <description>Recent content on My New Hugo Site</description>
+    <description>Recent content on Aegiszz&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 01 May 2022 14:20:12 +0800</lastBuildDate><atom:link href="https://aegiszz.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 02 May 2022 10:50:13 +0800</lastBuildDate><atom:link href="https://aegiszz.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>second</title>
-      <link>https://aegiszz.github.io/posts/first/</link>
-      <pubDate>Sun, 01 May 2022 14:20:12 +0800</pubDate>
+      <title>简介</title>
+      <link>https://aegiszz.github.io/dailies/%E7%AE%80%E4%BB%8B/</link>
+      <pubDate>Mon, 02 May 2022 10:50:13 +0800</pubDate>
       
-      <guid>https://aegiszz.github.io/posts/first/</guid>
-      <description>zzzzzzzzz</description>
+      <guid>https://aegiszz.github.io/dailies/%E7%AE%80%E4%BB%8B/</guid>
+      <description>Hi，我是Aegiszz，我是胡桃|申鹤|雷电将军|欧罗巴|鸢泽美咲|（待补）单推人。
+这个版块计划记录些日常零散的学习，可能想到什么就写什么。所以垃圾会很多，虽然两边可能都是垃圾。主要还是想记录自己的学习过程，想当作日后系统整理知识体系的素材。</description>
     </item>
     
     <item>
-      <title>First</title>
-      <link>https://aegiszz.github.io/first/</link>
-      <pubDate>Sun, 01 May 2022 14:19:08 +0800</pubDate>
+      <title>简介</title>
+      <link>https://aegiszz.github.io/posts/%E7%AE%80%E4%BB%8B/</link>
+      <pubDate>Sun, 01 May 2022 21:42:47 +0800</pubDate>
       
-      <guid>https://aegiszz.github.io/first/</guid>
-      <description>秋梨膏</description>
+      <guid>https://aegiszz.github.io/posts/%E7%AE%80%E4%BB%8B/</guid>
+      <description>Hi，我是Aegiszz，我是胡桃|申鹤|雷电将军|欧罗巴|鸢泽美咲|（待补）单推人。
+直接简单说下搭建博客的目的
+ 记录自己的学习过程，整理混乱的思维，期望能有技术上的成长。 多写，拯救自己支离破碎的文字表达能力。 胡桃真的太喜欢我了ε٩(๑&amp;gt; ₃ &amp;lt;)۶з！ 待补。  这个版块计划写些系统整理过的知识，但是由于自己太菜了，暂定年更，以后想到什么再补充吧。</description>
     </item>
     
   </channel>
