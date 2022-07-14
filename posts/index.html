@@ -13,7 +13,7 @@
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.b4e19c453811e60acfec1f00c15ac2be1c53f6ab90187e684358ce7faaf48bab.css" integrity="sha256-tOGcRTgR5grP7B8AwVrCvhxT9quQGH5oQ1jOf6r0i6s=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://aegiszz.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://aegiszz.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://aegiszz.github.io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://aegiszz.github.io/img/favicon-32x32.png">
 <link rel="apple-touch-icon" href="https://aegiszz.github.io/apple-touch-icon.png">
 <link rel="mask-icon" href="https://aegiszz.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
@@ -99,13 +99,57 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Cosbench学习
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>简介 COSBench 是一款由 Intel 开源，用于对象存储的压测工具。兼容 S3 协议的对象存储系统，可使用该工具进行读写性能压测。 github链接：https://github.com/intel-cloud/cosbench
+安装 cosbench需要java环境，这里用了openjdk-8-jdk。
+$ apt install openjdk-8-jdk 从 https://github.com/intel-cloud/cosbench/releases 下载cosbench相应版本的压缩包，最新的0.4.2版本可能有点问题，我使用过程报了start not found和关于log4j相关错误，网上也有相同的问题，所以果断换到0.4.2.c4。
+这里选择0.4.2.c4版本，下载解压后，需要给sh脚本赋执行权限。
+$ wget https://github.com/intel-cloud/cosbench/releases/download/v0.4.2.c4/0.4.2.c4.zip $ unzip 0.4.2.c4.zip $ chmod &#43;x ./0.4.2.c4/*.sh 运行start-all.sh，若未报错，看下http://ip:19088/controller/和http://ip:18088/driver/是否有相关页面。
+若报错，可以去log文件夹下查看日志，我使用过程中遇到了端口占用的问题，把占用服务停了后，重新执行start-all.sh，运行成功。
+使用 进入conf目录下，查看s3-config-sample.xml配置文件内容
+ workload name：测试时显示的任务名称，这里可以自行定义 description：描述信息 storage type：存储类型，这里默认s3 config：对该类型的配置，accesskey访问accesskey，secretkey访问secretkey，endpoint访问的API workstage name : cosbench是分阶段按顺序执行，此处为init初始化阶段，主要是进行bucket的创建，workers表示执行该阶段的时候开启多少个工作线程，创建bucket通过不会计算为性能，所以单线程也可以;config处配置的是存储桶bucket的名称前缀;containers表示轮询数，上例中将会创建以s3testqwer为前缀，后缀分别为1和2的bucket prepare阶段 : 配置为bucket写入的数据，workers和config以及containers与init阶段相同，除此之外还需要配置objects，表示一轮写入多少个对象，以及object的大小。 main阶段 : 这里是进行测试的阶段，runtime表示运行的时间，时间默认为秒 operation type : 操作类型，可以是read、write、delete等。ratio表示该操作所占有操作的比例，例如上面的例子中测试读写，read的比例为80%,write的比例为20%; config中配置bucket的前缀后缀信息。注意write的sizes可以根据实际测试进行修改 cleanup阶段 : 这个阶段是进行环境的清理，主要是删除bucket中的数据，保证测试后的数据不会保留在集群中 dispose阶段 : 这个阶段是删除bucket  编辑好后，运行cli.sh.
+$ bash cli.sh submit conf/s3-config-sample.xml 然后可以到http://ip:19088/controller/查看报告</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-07-12 20:56:37 +0800 CST'>July 12, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to Cosbench学习" href="https://aegiszz.github.io/posts/cosbench%E5%AD%A6%E4%B9%A0/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>pip镜像源更换
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>写作目的 国内通过pip默认配置（https://pypi.python.org/simple/）安装包的话，可能会因为网络问题导致失败，一个最常见的解决方法就是更换为国内的镜像源来安装包。虽然这个操作并不复杂，但每次都要百度一下镜像源有哪些也挺麻烦，还是记录一下比较好。
+解决方法 更换pip源基本上分为临时更换和永久更换两个办法。
+临时解决 $ pip install -i &lt;url&gt; &lt;package&gt; -i –index-url url 镜像源地址
+package 安装包包名
+永久解决 永久解决只需要在pip.ini配置就行，可以通过pip config或者自己到相应路径创建文件。
+$ pip config set global.index-url &lt;url&gt; windows电脑之后会提示：Writing to C:\Users\username\AppData\Roaming\pip\pip.ini，pip安装包试一下，查看镜像源是否已经从默认的 https://pypi.python.org/simple/ 变为新的镜像源地址。
+当然也可以自己到该路径（Users\username\pip\pip.ini也可以，测试下来前者优先度更高）创建pip文件夹及pip.ini文件。
+国内镜像源 清华：https://pypi.tuna.tsinghua.edu.cn/simple/
+阿里云：http://mirrors.aliyun.com/pypi/simple/
+中国科技大学 ：https://pypi.mirrors.ustc.edu.cn/simple/
+华中科技大学：http://pypi.hustunique.com/
+豆瓣：http://pypi.douban.com/simple/
+其他   如果遇到 The repository located at mirrors.aliyun.com is not a trusted or secure host and is being ignored. If this repository is available via HTTPS it is recommended to use HTTPS instead, otherwise you may silence this warning and allow it anyways with ‘–trusted-host mirrors....</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-05-17 22:31:57 +0800 CST'>May 17, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to pip镜像源更换" href="https://aegiszz.github.io/posts/pip%E6%BA%90%E6%9B%B4%E6%8D%A2/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>简介
     </h2>
   </header>
   <div class="entry-content">
     <p>Hi，我是Aegiszz，我是胡桃|申鹤|雷电将军|欧罗巴|鸢泽美咲|（待补）单推人。
 直接简单说下搭建博客的目的
- 记录自己的学习过程，整理混乱的思维，期望能有技术上的成长。 多写，拯救自己支离破碎的文字表达能力。 胡桃真的太喜欢我了ε٩(๑&gt; ₃ &lt;)۶з！ 待补。  这个版块计划写些系统整理过的知识，但是由于自己太菜了，暂定年更，以后想到什么再补充吧。</p>
+ 记录自己的学习过程，整理混乱的思维，期望能有技术上的成长。 多写，拯救自己支离破碎的文字表达能力。 胡桃真的太喜欢我了ε٩(๑&gt; ₃ &lt;)۶з！ 待补。  暂定年更。</p>
   </div>
   <footer class="entry-footer"><span title='2022-05-01 21:42:47 +0800 CST'>May 1, 2022</span></footer>
   <a class="entry-link" aria-label="post link to 简介" href="https://aegiszz.github.io/posts/%E7%AE%80%E4%BB%8B/"></a>
